@@ -14,6 +14,20 @@ const cartItems = [
       amount: 1,
     },
     {
+      id: 'recB6qcHPxb62YJ7534',
+      title: 'google pixel',
+      price: '499.99',
+      img: 'https://images2.imgbox.com/fb/3d/O4TPmhlt_o.png',
+      amount: 1,
+    },
+    {
+      id: 'recB6qcHPxb62YJ753443',
+      title: 'google pixel',
+      price: '499.99',
+      img: 'https://images2.imgbox.com/fb/3d/O4TPmhlt_o.png',
+      amount: 1,
+    },
+    {
       id: 'recdRxBsE14Rr2VuJ',
       title: 'Xiaomi Redmi Note 2',
       price: '699.99',

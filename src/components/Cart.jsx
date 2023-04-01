@@ -1,6 +1,8 @@
 import React from 'react';
 import './Cart.css';
+import { gsap } from 'gsap';
 import { useSelector, useDispatch } from 'react-redux';
+import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { clearCart,removeItem,increaseQuantity, decreaseQuantity  } from '../features/Cartitems';
 
 const Cart = () => {
@@ -8,14 +10,22 @@ const Cart = () => {
   const cart = useSelector(state => state.Cartitems);
   const dispatch = useDispatch();
 
+  const handleAni = (target,idx) =>{
+    const ele = target.target.parentElement.parentElement.parentElement;
+    gsap.fromTo(ele,{ y : -20, opacity : 1}, { y : 20, opacity:0 ,duration: 0.4 , onComplete : () =>{
+      dispatch(removeItem(idx))
+    }});
+  };
+
+
   return (
     <div>
-      <h5>Your Cart ({cartItems.length} items)</h5>
+      <h5 className='cart_header'>Your Cart ({cartItems.length || 'empty'} items)</h5>
 
       <div className='cartitems_container'>
         {
           cartItems.map(i => <CartItemsCom key={i.id} props={i} 
-          fun={idx => dispatch(removeItem(idx))} 
+          fun={(tar,idx) => handleAni(tar,idx)} 
           increase={idx => dispatch(increaseQuantity(idx)) }
           decrease={ idx => dispatch(decreaseQuantity(idx))}
           />)
@@ -42,14 +52,20 @@ const CartItemsCom = ({ props,fun,increase,decrease }) => {
         <div>
           <h5>{title}</h5>
           <p>${price}</p>
-          <button className='remove_btn' onClick={() => fun(id)}>remove</button>
+          <button className='remove_btn' onClick={(e) => fun(e,id)}>remove</button>
         </div>
       </section>
 
       <section className='item_quantity'>
-        <button onClick={() => increase(id)}>plus</button>
-        <p>{amount}</p>
-        <button onClick={() => decrease(id)}>minus</button>
+        <button className='cart_btn plus' onClick={() => increase(id)}>
+          <AiOutlinePlus />
+        </button>
+        <p style={{
+          textAlign:'center'
+        }}>{amount}</p>
+        <button className='cart_btn minus' onClick={() => decrease(id)}>
+          <AiOutlineMinus />
+        </button>
       </section>
 
   </div>

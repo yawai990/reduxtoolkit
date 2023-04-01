@@ -37,12 +37,6 @@ const Card = ({props}) => {
       
     }
   });
-
-  // parent.appendChild(cloneImg);
-
-
-
-// animatin will come here
  }
 
   return (
@@ -52,14 +46,16 @@ const Card = ({props}) => {
         </div>
 
         <div className='card_content_container'>
-        <div className='card_content'>
             <h5 className='card_header'>{title}</h5>
+
+        <div className='card_content'>
             <p className='card_price'>$ {price}</p>
-        </div>
 
         <button className='card_button' onClick={(e) => {
           handleClick(e)
           dispatch(addItem(props))}}>Add to card</button>
+          </div>
+          
         </div>
     </main>
   )
