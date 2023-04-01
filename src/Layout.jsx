@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { GiShoppingCart } from 'react-icons/gi';
 
 const Layout = () => {
     const cart = useSelector(state => state.Cartitems);
@@ -11,7 +12,8 @@ const Layout = () => {
         <Link to={'/cart'}>
         <button className='cart'>
             <span>{cart.total}</span>
-            Cart</button>
+            <GiShoppingCart className='cart_icon' />
+            </button>
         </Link>
         </nav>
         <Outlet />

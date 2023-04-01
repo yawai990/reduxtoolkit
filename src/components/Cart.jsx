@@ -24,7 +24,7 @@ const Cart = () => {
             <p>Total Amount</p>
             <p>${cart.amount.toFixed(2)}</p>
         </div>
-        <buttom className='clear_cart_btn' onClick={() => dispatch(clearCart())}>Clear Cart</buttom>
+        <button className='clear_cart_btn' onClick={() => dispatch(clearCart())}>Clear Cart</button>
       </div>
 
     </div>
