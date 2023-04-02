@@ -7,8 +7,8 @@ import Flip from 'gsap/Flip';
 
 gsap.registerPlugin(Flip)
 
-const Card = ({props}) => {
-  const { title, price, img } = props;
+const Card = ({ props }) => {
+  const { productName, price, image } = props;
   const cart = useSelector(state => state.Cartitems);
   const dispatch = useDispatch();
 
@@ -18,7 +18,7 @@ const Card = ({props}) => {
    const cart = document.getElementsByClassName('cart');
   const cloneImg = document.createElement('img');
   cloneImg.setAttribute('class','clone_img');
-  cloneImg.src = img;
+  cloneImg.src = `https://res.cloudinary.com/dtcws1ecu/image/upload/v1675503460/${image[0].path}`;
   const state = Flip.getState(cloneImg,{ props :'width'});
   cart[0].appendChild(cloneImg);
   Flip.from(state, {
@@ -42,11 +42,11 @@ const Card = ({props}) => {
   return (
     <main className='card'>
         <div className='card_image_container'>
-            <img src={img} alt="" className='card_image' />
+            <img src={`https://res.cloudinary.com/dtcws1ecu/image/upload/v1675503460/${image[0].path}`} alt="" className='card_image' />
         </div>
 
         <div className='card_content_container'>
-            <h5 className='card_header'>{title}</h5>
+            <h5 className='card_header'>{productName}</h5>
 
         <div className='card_content'>
             <p className='card_price'>$ {price}</p>

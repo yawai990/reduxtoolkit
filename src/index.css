@@ -6,7 +6,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: black;
   background-color: #ffffff;
 
   font-synthesis: none;
@@ -40,6 +40,7 @@ nav{
 .logo{
   font-style: italic;
   font-size: 1.8rem;
+  color: white;
 }
 nav button {
   border: none;
@@ -73,13 +74,21 @@ nav button > span {
   font-size: larger;
   padding: 2px;
 }
-.card_container{
+.product_container{
   width: 90%;
   margin:10px auto;
+}
+.card_container{
+  width: 100%;
   display: flex;
-  gap: 5px;
+  gap: 10px;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
+}
+.header_text{
+  color: #444;
+  font-size: 22px;
+  margin-bottom: 0.4rem;
 }
 .Footer{
   width: 100%;

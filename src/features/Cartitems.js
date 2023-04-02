@@ -17,13 +17,13 @@ const cartSlice = createSlice({
             state.amount = 0;
         },
         addItem : (state,{ payload })  =>{
-            const isExit = state.cartItems.find(i => i.id === payload.id) !== undefined;
+            const isExit = state.cartItems.find(i => i._id === payload._id) !== undefined;
             
             if(isExit){
-                const item = state.cartItems.find(item => item.id === payload.id)
+                const item = state.cartItems.find(item => item._id === payload._id);
                 item.amount = item.amount + 1;
             }else{
-                state.cartItems = [...state.cartItems, payload]
+                state.cartItems = [...state.cartItems,{...payload, amount : 1}]
             }
             state.total = state.cartItems.reduce((cur, accu) =>{
                 return cur + accu.amount
@@ -34,7 +34,7 @@ const cartSlice = createSlice({
   
         },
         removeItem : (state, { payload }) =>{
-           state.cartItems = state.cartItems.filter(i => i.id !== payload)
+           state.cartItems = state.cartItems.filter(i => i._id !== payload)
            state.total = state.cartItems.reduce((cur, accu) =>{
             return cur + accu.amount
         },0);
@@ -43,7 +43,7 @@ const cartSlice = createSlice({
         },0);
         },
         increaseQuantity:(state,{ payload}) =>{
-            const cartItem = state.cartItems.find((item) => item.id === payload);
+            const cartItem = state.cartItems.find((item) => item._id === payload);
            cartItem.amount = cartItem.amount + 1
             state.total = state.cartItems.reduce((cur, accu) =>{
                 return cur + accu.amount
@@ -53,10 +53,10 @@ const cartSlice = createSlice({
             },0);
         },
         decreaseQuantity :(state,{payload}) =>{
-            const cartItem = state.cartItems.find((item) => item.id === payload);
+            const cartItem = state.cartItems.find((item) => item._id === payload);
             cartItem.amount = cartItem.amount - 1;
             if(cartItem.amount <= 0 ){
-                state.cartItems = state.cartItems.filter(i => i.id !== payload)
+                state.cartItems = state.cartItems.filter(i => i._id !== payload)
             }
                 state.total = state.cartItems.reduce((cur, accu) =>{
                     return cur + accu.amount

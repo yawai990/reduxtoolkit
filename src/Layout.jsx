@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { GiShoppingCart } from 'react-icons/gi';
 import Footer from './components/Footer';
+import { getAllProducts } from './features/Product';
+import Hero from './components/hero/Hero';
 
 const Layout = () => {
     const cart = useSelector(state => state.Cartitems);
+    const dispatch = useDispatch();
+
+    useEffect(() =>{
+      dispatch(getAllProducts())
+    },[]);
   return (
     <>
             <nav>
@@ -17,6 +24,7 @@ const Layout = () => {
             </button>
         </Link>
         </nav>
+        <Hero />
         <Outlet />
         <Footer />
     </>

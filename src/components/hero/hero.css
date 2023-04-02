@@ -1,0 +1,85 @@
+.hero_container{
+     width: 90%;
+     margin: 2rem auto;
+     background-color: #576CBC;
+     background-image: url('../../assets/bg2.png');
+     background-size: contain;
+     background-repeat: repeat;
+     background-origin: border-box;
+     border-radius: 20px;
+}
+.hero_card_container{
+     width: 70%;
+     min-height: 65vh;
+     max-height: 75vh;
+     background-color: transparent;
+     margin: 2rem auto;
+     overflow: hidden;
+     position:relative;
+}
+.slogan_container{
+     width: 300px;
+     min-height: 120px;
+     display: flex;
+     justify-content: center;
+     align-items: flex-start;
+     flex-direction: column;
+     position: absolute;
+     top: 7rem;
+     left: 90px;
+     color: white;
+}
+.slogan{
+     font-size: 3.5rem;
+     -webkit-text-stroke: solid;
+     -webkit-text-stroke-color: white;
+     -webkit-text-stroke-width: 1px;
+     color: transparent;
+     margin-bottom: 5px;
+}
+.slogan_container > p{
+     margin-bottom: 2rem;
+     font-size: 18px;
+     text-transform: capitalize;
+}
+.btn{
+     background-color: transparent;
+     outline: none; 
+     text-transform: capitalize;
+     padding: 8px 10px;
+     border: 0.5px solid grey;
+     border-radius: 3px;
+     cursor: pointer;
+     transition: 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.btn.explore_btn{
+     background-color: var(--primary);
+     color: white;
+     font-size: 18px;
+}
+.btn:hover{
+     box-shadow: 0 2px 90px rgba(32,32,32,0.3);
+}
+.hero_image{
+     width: 40%;
+     height: 90%;
+     float: right;
+     position: relative;
+}
+.bubbles {
+     width: 300px;
+     height: 300px;
+     position: absolute;
+     top: 10px;
+     left: 15px;
+     background-color: var(--primary);
+     border-radius: 49% 49% 31% 37% / 47% 48% 0% 0%;
+}
+.hero_image img{
+     width: 100%;
+     height: 100%;
+     object-position: top;
+     object-fit: cover;
+     position: inherit;
+     z-index: 1;
+}
