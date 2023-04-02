@@ -29,7 +29,7 @@
 }
 .card_content_container .card_header{
     text-transform: uppercase;
-    text-align: right;
+    text-align: start;
 
 }
 .card_content{

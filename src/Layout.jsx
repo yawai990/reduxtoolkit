@@ -24,7 +24,6 @@ const Layout = () => {
             </button>
         </Link>
         </nav>
-        <Hero />
         <Outlet />
         <Footer />
     </>

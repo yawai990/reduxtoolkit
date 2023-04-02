@@ -1,5 +1,6 @@
 import React,{ useEffect } from 'react';
 import './Card.css';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from '../features/Cartitems';
 import gsap from 'gsap';
@@ -8,13 +9,13 @@ import Flip from 'gsap/Flip';
 gsap.registerPlugin(Flip)
 
 const Card = ({ props }) => {
-  const { productName, price, image } = props;
+  const { _id,productName, price, image } = props;
   const cart = useSelector(state => state.Cartitems);
   const dispatch = useDispatch();
 
   const handleClick = e =>{
     const curTar = e.target;
-    const { x,y, width } = curTar.getBoundingClientRect();
+    const { y, right ,x,top } = curTar.getBoundingClientRect();
    const cart = document.getElementsByClassName('cart');
   const cloneImg = document.createElement('img');
   cloneImg.setAttribute('class','clone_img');
@@ -27,7 +28,7 @@ const Card = ({ props }) => {
     absolute : true,
     ease: 'back.in(2)',
     onComplete : () =>{
-      gsap.fromTo(cloneImg,{ x : e.clientX - 1400,y,scale :2 }, { x:0,y:0,scale :0.2, 
+      gsap.fromTo(cloneImg,{ x : e.clientX - (y + right),y,scale :2 }, { x:0,y:0,scale :0.2, 
         onComplete:()=>{
          const img = document.querySelectorAll('.clone_img');
           // cart[0].removeChild(img)
@@ -37,13 +38,15 @@ const Card = ({ props }) => {
       
     }
   });
- }
+ };
 
   return (
     <main className='card'>
+      <Link to={`/product/${_id}`}>
         <div className='card_image_container'>
             <img src={`https://res.cloudinary.com/dtcws1ecu/image/upload/v1675503460/${image[0].path}`} alt="" className='card_image' />
         </div>
+      </Link>
 
         <div className='card_content_container'>
             <h5 className='card_header'>{productName}</h5>

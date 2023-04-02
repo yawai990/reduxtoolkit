@@ -10,8 +10,6 @@ const Cart = () => {
   const cart = useSelector(state => state.Cartitems);
   const dispatch = useDispatch();
 
-  console.log(cart)
-
   const handleAni = (target,idx) =>{
     const ele = target.target.parentElement.parentElement.parentElement;
     gsap.fromTo(ele,{ y : -40, opacity : 1}, { y : 20, opacity:0 ,duration: 0.8, ease:'ease' , onComplete : () =>{

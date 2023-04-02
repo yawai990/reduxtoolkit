@@ -36,6 +36,9 @@ nav{
   justify-content: space-between;
   align-items: center;
   padding:0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 .logo{
   font-style: italic;
@@ -48,6 +51,33 @@ nav button {
   border-radius: 50%;
   cursor: pointer;
   position: relative;
+}
+.flex{
+  display: flex;
+}
+.justify-center{
+  justify-content: center;
+}
+.justify-between{
+  justify-content: space-between;
+}
+.align_center{
+  align-items: center;
+}
+.border_grey{
+  border: 0.5px solid grey;
+}
+.p-x-sm{
+  padding: 0 5px;
+}
+.gap{
+  gap: 40px;
+}
+.bg_grey{
+  background-color: rgba(189, 189, 189, 0.795);
+}
+.rounded-sm{
+  border-radius: 5%;
 }
 nav button > span {
   width: 20px;

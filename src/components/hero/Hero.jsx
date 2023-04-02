@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import './hero.css';
 import image from '../../assets/hero.png';
 import { gsap } from 'gsap';
+import Product from '../Product';
+import NewArrival from '../newarrival/NewArrival';
+import Bestseller from '../bestseller/Bestseller';
 
 const Hero = () => {
           
@@ -13,6 +16,7 @@ const Hero = () => {
 
      }, []);
   return (
+     <>
      <main className='hero_container'>
     <section className='hero_card_container'>
 
@@ -30,6 +34,10 @@ const Hero = () => {
      </div>
     </section>
     </main>
+    <Bestseller />
+    <NewArrival />
+    <Product />
+    </>
   )
 }
 
