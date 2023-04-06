@@ -1,0 +1,13 @@
+.about_us{
+     width: 90%;
+     margin: 0 auto;
+     margin-top: 2rem;
+}
+.about_us_header{
+     border-bottom: 1.25px solid rgb(141, 141, 141);
+     padding-bottom: 0.5rem;
+}
+.about_us_header > h5{
+    font-size: 24px;
+    color: #444;
+}

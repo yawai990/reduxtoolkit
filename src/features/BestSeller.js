@@ -2,19 +2,18 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from '../services';
 
 const initialState = {
-     products :[],
+     bestseller :[],
      loading : true,
      isSuccess : false,
      errMessage : ''
 };
 
-export const getAllProducts = createAsyncThunk('products', arg =>{
-     const { brand, category } = arg;
+export const getBestSeller = createAsyncThunk('bestsellers', arg =>{
      try {
-          const data = api.getProducts(brand, category)
+          const data = api.bestSellersProducts()
           .then(resp =>{
-               const { products } = resp.data;
-               return products;
+               const { bestseller } = resp.data;
+               return bestseller;
           });
 
           return data;
@@ -23,25 +22,25 @@ export const getAllProducts = createAsyncThunk('products', arg =>{
      }
 })
 
-const Products = createSlice({
-     name : 'products',
+const bestSellerProducts = createSlice({
+     name : 'best sellers',
      initialState,
      extraReducers : {
-          [getAllProducts.pending] : (state, action ) =>{
+          [getBestSeller.pending] : (state, action ) =>{
                state.loading = true,
                state.isSuccess = false;
-               state.products = [];
+               state.bestseller = [];
           },
-          [getAllProducts.fulfilled] : (state, { payload }) => {
+          [getBestSeller.fulfilled] : (state, { payload }) => {
                state.loading = false,
                state.isSuccess = true;
-               state.products = payload;
+               state.bestseller = payload;
           },
-          [getAllProducts.rejected]:(state,action)=>{
+          [getBestSeller.rejected]:(state,action)=>{
                state.loading = true,
                state.isSuccess = false;
-               state.products = [];
+               state.bestseller = [];
           }
      }
 })
-export default Products.reducer;
+export default bestSellerProducts.reducer;

@@ -50,7 +50,7 @@ const ProductDetail = () => {
                >add to cart</button>
           </main>
 
-               <Review />
+               <Review pID={curProductId} />
           </section>
 
      </div>

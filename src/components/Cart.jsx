@@ -3,6 +3,7 @@ import './Cart.css';
 import { gsap } from 'gsap';
 import { useSelector, useDispatch } from 'react-redux';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
+import { loadScript } from '@paypal/paypal-js';
 import { clearCart,removeItem,increaseQuantity, decreaseQuantity  } from '../features/Cartitems';
 
 const Cart = () => {
@@ -17,6 +18,17 @@ const Cart = () => {
     }});
   };
 
+  const loadScriptHandler = () => {
+    loadScript({
+      "client-id":'ASLaQ5GXGWhdv3B_IetdX6rOkZw7mmjFKXCp7ZU9FPFcshXTaLi6_e6IKePO_e-cymbAhQBzpwcxBR2B'
+    })
+    .then(paypal => {
+      console.log(paypal)
+      paypal.Buttons(buttons(1,2,3))
+      .render("#paypal-container-element")
+    })
+    .catch(err => console.log(err))
+  }
 
   return (
     <div>
@@ -34,7 +46,11 @@ const Cart = () => {
             <p>Total Amount</p>
             <p>${cart.amount.toFixed(2)}</p>
         </div>
+        <div className='flex justify-center align_center gap m-top'>
+        <button className='clear_cart_btn' onClick={loadScriptHandler}>Check out</button>
         <button className='clear_cart_btn' onClick={() => dispatch(clearCart())}>Clear Cart</button>
+        </div>
+
       </div>
 
     </div>

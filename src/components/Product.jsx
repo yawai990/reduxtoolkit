@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from './Card';
-import cartitems from '../data';
-import { useSelector } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
+import { getAllProducts } from '../features/Product';
 import Loading from './Loading/Loading';
 
 const Product = () => {
+  const [ filterLoading , setFilterLoading ] = useState(false);
+  const dispatch = useDispatch();
   const { products, loading, isSuccess } = useSelector(state => state.Product);
+  const { categories,cat_loading } = useSelector(state => state.Category);
 
-  if(loading && !isSuccess){
+  const filterHandler = e => {
+    e.preventDefault();
+    setFilterLoading(true)
+
+    const elements = e.currentTarget.elements;
+    
+    const category = elements.category.value;
+    const brand = elements.brand.value;
+      dispatch(getAllProducts({ brand, category}))
+      setFilterLoading(false);
+  }
+
+  if(loading && cat_loading && !isSuccess){
     return <Loading />
   }
 
@@ -19,19 +34,20 @@ const Product = () => {
 
       <div>
         
-        <form style={{ gap : '10px'}} className='flex align_center'>
+        <form style={{ gap : '10px'}} className='flex align_center' onChange={filterHandler}> 
           <p>Filter By:</p>
 
           <div style={{ gap : '10px'}} className='flex align_center'>
-          <select defaultValue={'DEFAULT'}>
+          <select defaultValue={'DEFAULT'} name='category'>
             <option value={'DEFAULT'} disabled>category</option>
-            <option value={1}>furniture</option>
-            <option value={2}>fashion</option>
-            <option value={3}>electronic</option>
-            <option value={4}>cosmetic</option>
+            {
+              categories?.map(cat => (
+                <option className='capitalize' value={cat.category} key={cat._id}>{cat.category}</option>
+              ))
+            }
           </select>
 
-          <select defaultValue={'DEFAULT'}>
+          <select defaultValue={'DEFAULT'} name='brand'>
             <option value={'DEFAULT'} disabled>brand</option>
             <option value={1}>adidas</option>
             <option value={2}>under armor</option>
@@ -45,9 +61,12 @@ const Product = () => {
       </main>
     <div className='card_container'>
     {
+      filterLoading ? <p>Loading...</p>:
+     products.length > 0 ?
       products?.map(i => (
         <Card key={i._id} props={i} />
-      ))
+      )):
+      <p>There is no product</p>
     }
   </div>
   </div>

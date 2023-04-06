@@ -1,9 +1,27 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import * as api from '../../services';
 import './review.css';
 
-const Review = () => {
+const Review = ({ pID }) => {
+     const dispatch = useDispatch();
+     // const state = useSelector(state => state);
+ 
+     const handleWriteReview = async(e) => {
+          e.preventDefault();
+          const elements = e.currentTarget.elements;
+         const rating = elements.rating.value;
+         const desc = elements.message.value;
+        if(rating && desc ) {
+          await api.WriteReview(pID,{rating,comment : desc})
+          .then(resp =>{
+               console.log(resp)
+          })
+          .catch(err => console.log(err))
+        }
+     }
   return (
-    <form>
+    <form onSubmit={handleWriteReview}>
 
      <h5 style={{
           marginBottom : '1.4rem'
@@ -20,8 +38,8 @@ const Review = () => {
      </div>
 
      <div className='form-control'>
-          <label htmlFor="rating">Description</label>
-         <textarea placeholder='Write your review....' />
+          <label htmlFor="message">Description</label>
+         <textarea name='review_message'id='message' placeholder='Write your review....' />
      </div>
 
      <button className='btn review_btn'>Submit</button>

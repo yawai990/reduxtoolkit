@@ -23,6 +23,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+.width-90{
+  width: 90%;
+  margin: 0 auto;
+}
 a{
   text-decoration: none;
   display: block;
@@ -55,6 +59,9 @@ nav button {
 .flex{
   display: flex;
 }
+.row_reverse {
+  flex-direction: row-reverse;
+}
 .justify-center{
   justify-content: center;
 }
@@ -63,6 +70,9 @@ nav button {
 }
 .align_center{
   align-items: center;
+}
+.m-top{
+  margin-top: 1.4rem;
 }
 .border_grey{
   border: 0.5px solid grey;
@@ -76,8 +86,20 @@ nav button {
 .bg_grey{
   background-color: rgba(189, 189, 189, 0.795);
 }
+.text-white{
+  color: white;
+}
 .rounded-sm{
   border-radius: 5%;
+}
+.capitalize{
+  text-transform: capitalize;
+}
+.nav_link{
+  transition: all 0.35s ease;
+}
+.nav_link:hover{
+  color: rgb(180, 180, 180);
 }
 nav button > span {
   width: 20px;
