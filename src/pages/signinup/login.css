@@ -1,0 +1,34 @@
+.login_form_container{
+     width: 75%;
+     height: 70vh;
+     background-color: rgb(82, 174, 211);
+     background-image: url('../../assets/bg2.png');
+     background-repeat: repeat;
+     background-size: cover;
+     background-position: center;
+     box-shadow: 0 0 10px rgba(87, 87, 87, 0.6);
+     background-blend-mode: multiply;
+     border-radius: 10px;
+}
+.login_form_container_right{
+     margin-top: 2.2rem;
+}
+.w_h_half{
+     width: 50%;
+     height: 100%;
+}
+.login_image{
+     width: 60%;
+     height: 60%;
+     object-fit: cover;
+}
+.login_form{
+     width: 70%;
+}
+.sign_in_btn{
+     width: 100%;
+     height: 35px;
+     margin-top: 1.3rem;
+     background-color: var(--primary);
+     border: none;
+}

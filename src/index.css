@@ -49,6 +49,12 @@ nav{
   font-size: 1.8rem;
   color: white;
 }
+.w-full{
+  width: 100vw;
+}
+.h-full{
+  min-height: 100vh;
+}
 nav button {
   border: none;
   background-color: transparent;
