@@ -20,4 +20,5 @@ API.interceptors.request.use(req => {
 
 export const allCategories = () => API.get(`/category/getallcategory`);
 
+export const getSinglePro = (id) => API.get(`/products/singleproduct/${id}`)
 export const WriteReview = (p_id, data) => API.post(`/user/review/${p_id}`, data);
