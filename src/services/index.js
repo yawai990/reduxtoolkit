@@ -10,6 +10,13 @@ export const Register = (data)=> API.post(`/user/register`,data);
 export const getProducts = ( brand, category ) => API.get(`/products/allproducts?brand=${brand || ''}&category=${category || ''}`);
 export const bestSellersProducts = () => API.get('/products/bestsellers');
 
+API.interceptors.request.use(req => {
+     const token = sessionStorage.getItem('token');
+     if(token){
+          req.headers.Authorization = `Bearer ${token}`
+     };
+     return req;
+}, err => err)
 
 export const allCategories = () => API.get(`/category/getallcategory`);
 

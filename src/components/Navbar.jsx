@@ -22,8 +22,15 @@ const Navbar = () => {
 
           <div className="flex align_center gap">
      <Link to={'/login'}>
-     <button className='btn text-white'>Login</button>
+     <button className='btn text-white'>
+          {
+               sessionStorage.getItem('token') ? 'Log Out':'Log in'
+          }
+          </button>
      </Link>
+     <div className='text-white'>
+          
+     </div>
      <Link to={'/cart'}>
      <button className='cart'>
          <span>{cart.total}</span>

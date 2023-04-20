@@ -1,7 +1,8 @@
 .login_form_container{
      width: 75%;
-     height: 70vh;
-     background-color: rgb(82, 174, 211);
+     height: 80vh;
+     /* background-color: rgb(82, 174, 211); */
+     background-color: rgb(253, 249, 249);
      background-image: url('../../assets/bg2.png');
      background-repeat: repeat;
      background-size: cover;

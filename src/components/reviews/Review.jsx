@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as api from '../../services';
 import './review.css';
+import { getAllProducts } from '../../features/Product';
 
 const Review = ({ pID }) => {
      const dispatch = useDispatch();
-     // const state = useSelector(state => state);
  
      const handleWriteReview = async(e) => {
           e.preventDefault();
@@ -16,6 +16,7 @@ const Review = ({ pID }) => {
           await api.WriteReview(pID,{rating,comment : desc})
           .then(resp =>{
                console.log(resp)
+               dispatch(getAllProducts())
           })
           .catch(err => console.log(err))
         }
