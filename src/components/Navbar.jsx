@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { GiShoppingCart } from 'react-icons/gi';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,7 +7,19 @@ import { BiUserCircle } from 'react-icons/bi';
 
 const Navbar = () => {
      const cart = useSelector(state => state.Cartitems);
+     const [ show ,setShow ] = useState(false);
 
+     useEffect(() =>{
+
+          if(sessionStorage.getItem('token')){
+               document.getElementById('profile').addEventListener('mouseout', () =>{
+                    setShow(true)
+                    setTimeout(() => {
+                         setShow(false)
+                    }, 3000);
+               })
+          }
+     },[ show ]);
 
      const handleLogOut = () => {
           sessionStorage.clear('token');
@@ -33,14 +45,18 @@ const Navbar = () => {
     
           {
                sessionStorage.getItem('token') ?  
-                <div className='profile_container text-white flex justify-center align_center relative' style={{ gap:'5px'}}>
-               <BiUserCircle className='profile' />
-                <p>admin</p>
-
+                <div id='profile' className='profile_container text-white relative' onClick={() => setShow(true)}>
+                    <div className='profile_container flex justify-center align_center' style={{ gap:'5px'}}>
+                    <BiUserCircle className='profile' />
+                    <p>admin</p>
+                </div>
+               {
+                    show && 
                 <div className='user_data_pop_up'>
                     <button>Setting</button>
                     <button onClick={handleLogOut}>Log Out</button>
                 </div>
+               }
                 </div>
                : 
                <Link to={'/login'}>

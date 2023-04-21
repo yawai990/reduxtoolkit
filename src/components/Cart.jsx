@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Cart.css';
 import { gsap } from 'gsap';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { loadScript } from '@paypal/paypal-js';
 import { clearCart,removeItem,increaseQuantity, decreaseQuantity  } from '../features/Cartitems';
-import { onApproveHandler,onCancelHandler,onErrHandler } from './util/Paypal';
+import { onCancelHandler,onErrHandler } from './util/Paypal';
+import { useNavigate } from 'react-router-dom';
+import * as api from '../services';
 
 const Cart = () => {
-  const cartItems = useSelector(state => state.Cartitems.cartItems);
+  const { cartItems,amount} = useSelector(state => state.Cartitems);
   const cart = useSelector(state => state.Cartitems);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [ popup,setPopup ] = useState(false);
+
+  useEffect(() =>{
+    setPopup(false);
+  },[]);
 
   const handleAni = (target,idx) =>{
     const ele = target.target.parentElement.parentElement.parentElement;
@@ -19,7 +27,7 @@ const Cart = () => {
     }});
   };
 
-  const buttons = (carditem,id) => {
+  const buttons = (subtotal,carditem,id) => {
     return {
       createOrder:(data,actions) => {
         const orderPaymentLoad = {
@@ -27,37 +35,79 @@ const Cart = () => {
                {
                   amount : { 
                    currency_code:"USD",
-                  value : 23 ,
+                  value : subtotal ,
                   breakdown : {
                    item_total : {
                          currency_code : 'USD',
-                         value : 23
+                         value : subtotal
                    }
                 },
-                 },
+                 }
                   }]
            };
         return actions.order.create(orderPaymentLoad);
    },
-      onApprove:onApproveHandler,
+      onApprove:(data,actions) => {
+        return actions.order.capture()
+        .then(async(orderData) => {
+   
+          //send the data to the backend
+          var transaction = orderData.purchase_units[0].payments.captures[0];
+          
+          if(transaction.status ==="COMPLETED" && Number(transaction.amount.value) === Number(subtotal)){
+            await api.order(cartItems)
+           .then(resp => console.log(resp))
+           .catch(err => console.log(err));
+
+            setPopup(true)
+            setTimeout(() =>{
+              setPopup(false);
+              navigate('/');
+              dispatch(clearCart())
+            },4000);  
+          }
+        })
+   },
       onCancel : onCancelHandler,
       onError:onErrHandler
     }
-  }
+  };
 
   const loadScriptHandler = () => {
-    loadScript({
-      "client-id":'ASLaQ5GXGWhdv3B_IetdX6rOkZw7mmjFKXCp7ZU9FPFcshXTaLi6_e6IKePO_e-cymbAhQBzpwcxBR2B'
-    })
-    .then(paypal => {
-      paypal.Buttons(buttons(cartItems,21)).render("#paypal-container-element")
-    })
-    .catch(err => console.log(err))
+
+    if(sessionStorage.getItem('token')){
+      loadScript({
+        "client-id":'ASLaQ5GXGWhdv3B_IetdX6rOkZw7mmjFKXCp7ZU9FPFcshXTaLi6_e6IKePO_e-cymbAhQBzpwcxBR2B'
+      })
+      .then(paypal => {
+        paypal.Buttons(buttons(amount,cartItems,21)).render("#paypal-container-element")
+      })
+      .catch(err => console.log(err))
+    }else{
+      navigate('/login')
+    }
   }
 
   return (
     <div>
       <h5 className='cart_header'>Your Cart ({cartItems.length || 'empty'} items)</h5>
+
+      {
+        popup && 
+        <main className='thank_u_popup flex justify-center align_center gap-sm'>
+          <div>
+          <p>
+            Thank You For your buying
+          </p>
+          <div>
+            <p className='m-top'> Redirecting to Home Page...</p>
+            {/* <div className='countdown flex justify-center align_center'>
+              {countDown}
+            </div> */}
+          </div>
+          </div>
+          </main>
+      }
 
       <div className='cartitems_container'>
         {
