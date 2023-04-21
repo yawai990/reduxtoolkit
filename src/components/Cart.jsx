@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { loadScript } from '@paypal/paypal-js';
 import { clearCart,removeItem,increaseQuantity, decreaseQuantity  } from '../features/Cartitems';
+import { onApproveHandler,onCancelHandler,onErrHandler } from './util/Paypal';
 
 const Cart = () => {
   const cartItems = useSelector(state => state.Cartitems.cartItems);
@@ -18,14 +19,38 @@ const Cart = () => {
     }});
   };
 
+  const buttons = (carditem,id) => {
+    return {
+      createOrder:(data,actions) => {
+        const orderPaymentLoad = {
+             purchase_units :[
+               {
+                  amount : { 
+                   currency_code:"USD",
+                  value : 23 ,
+                  breakdown : {
+                   item_total : {
+                         currency_code : 'USD',
+                         value : 23
+                   }
+                },
+                 },
+                  }]
+           };
+        return actions.order.create(orderPaymentLoad);
+   },
+      onApprove:onApproveHandler,
+      onCancel : onCancelHandler,
+      onError:onErrHandler
+    }
+  }
+
   const loadScriptHandler = () => {
     loadScript({
       "client-id":'ASLaQ5GXGWhdv3B_IetdX6rOkZw7mmjFKXCp7ZU9FPFcshXTaLi6_e6IKePO_e-cymbAhQBzpwcxBR2B'
     })
     .then(paypal => {
-      console.log(paypal)
-      paypal.Buttons(buttons(1,2,3))
-      .render("#paypal-container-element")
+      paypal.Buttons(buttons(cartItems,21)).render("#paypal-container-element")
     })
     .catch(err => console.log(err))
   }
@@ -46,10 +71,16 @@ const Cart = () => {
             <p>Total Amount</p>
             <p>${cart.amount.toFixed(2)}</p>
         </div>
+
+        <section className='flex justify-center align_center flex-col gap m-top'>
+
         <div className='flex justify-center align_center gap m-top'>
+       
         <button className='clear_cart_btn' onClick={loadScriptHandler}>Check out</button>
         <button className='clear_cart_btn' onClick={() => dispatch(clearCart())}>Clear Cart</button>
         </div>
+        <div id="paypal-container-element" style={{ maxWidth:'200px'}}></div>
+        </section>
 
       </div>
 

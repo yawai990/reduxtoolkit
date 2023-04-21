@@ -1,25 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as api from '../../services';
 import './review.css';
 import { getAllProducts } from '../../features/Product';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Review = ({ pID }) => {
      const dispatch = useDispatch();
+     const navigate = useNavigate();
+     const [ showErr, setShowErr ] = useState(true);
  
      const handleWriteReview = async(e) => {
           e.preventDefault();
           const elements = e.currentTarget.elements;
          const rating = elements.rating.value;
          const desc = elements.message.value;
-        if(rating && desc ) {
-          await api.WriteReview(pID,{rating,comment : desc})
-          .then(resp =>{
-               console.log(resp)
-               dispatch(getAllProducts())
-          })
-          .catch(err => console.log(err))
-        }
+
+         if(sessionStorage.getItem('token')){
+              if(rating && desc ) {
+                await api.WriteReview(pID,{rating,comment : desc})
+                .then(resp =>{
+                     dispatch(getAllProducts())
+                     setShowErr(false)
+                })
+                .catch(err => console.log(err))
+              }
+         }else{
+          setShowErr(true)
+          navigate('/login')
+         }
      }
   return (
     <form onSubmit={handleWriteReview}>
@@ -44,8 +53,16 @@ const Review = ({ pID }) => {
      </div>
 
      <button className='btn review_btn'>Submit</button>
+     {
+         showErr &&
+     <p style={{ fontSize : '12px'}}>you need to log in to write review
+     <Link style={{ display:'inline-block', color:'#009FBD', marginLeft:'0.5rem', marginTop:'0.3rem'}} to={'/login'}>
+     go to login
+     </Link>
+     </p>
+     }
     </form>
   )
 }
 
-export default Review
+export default Review;

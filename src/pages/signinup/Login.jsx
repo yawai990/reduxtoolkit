@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './login.css';
 import image from '../../assets/pngwing.com (3).png';
 import { AiOutlineMail } from 'react-icons/ai';
@@ -24,11 +24,12 @@ const Login = () => {
 
     //call the api
     dispatch(logIn({ email, password}));
-
-    if(sessionStorage.getItem('token')){
-       location.href = '/'
+    const token = sessionStorage.getItem('token');
+    if(token){
+      location.href = '/'
     }
-  }
+  };
+
 
   return (
     <main className='w-full h-full flex justify-center align_center'>

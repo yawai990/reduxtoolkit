@@ -32,7 +32,6 @@ const ProductDetail = () => {
           getProduct(curProductId)
      }, []);
 
-     console.log(product)
 
      return (
     <main className="product_datails_container">
@@ -104,6 +103,7 @@ const ProductDetail = () => {
           </div>
 
                <Review pID={curProductId} />
+
           </section>
 
      </div>

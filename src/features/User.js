@@ -13,7 +13,6 @@ export const logIn = createAsyncThunk('users/login', async(payload, thunkAPI) =>
     const userData = await api.Login(payload)
      .then(resp => {
           const { userLoggedIn }  = resp.data;
-          console.log(userLoggedIn)
            return userLoggedIn;
 
      })
@@ -34,7 +33,7 @@ const User = createSlice({
           })
           .addCase(logIn.fulfilled,(state, { payload }) => {
                const { token } = payload;
-               sessionStorage.setItem('token',token)
+               sessionStorage.setItem('token',token);
                state.loading = false;
                state.userInfo = payload;
                state.userToken = token;
