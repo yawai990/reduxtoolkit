@@ -53,7 +53,9 @@ const Navbar = () => {
                {
                     show && 
                 <div className='user_data_pop_up'>
+                    <Link to={'/user/userinfo'}>
                     <button>Setting</button>
+                    </Link>
                     <button onClick={handleLogOut}>Log Out</button>
                 </div>
                }

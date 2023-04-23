@@ -1,0 +1,24 @@
+.usr_form_control{
+     margin-top: 0.8rem;
+}
+
+.usr_info_form_input{
+     outline: none;
+     border: 0.5px solid #555;
+     padding:5px;
+     border-radius: 5px;
+     background-color: transparent;
+     font-size: 1.08rem;
+     margin-top: 0.2rem;
+}
+.usr_info_label{
+     font-size: 16px;
+     letter-spacing: 1px;
+}
+.btn_usr_info{
+     min-width: 180px;
+     background-color: blue;
+     color: white;;
+     margin-top: 1rem;
+     font-size: 16px;
+}

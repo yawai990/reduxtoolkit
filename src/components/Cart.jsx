@@ -74,7 +74,7 @@ const Cart = () => {
   };
 
   const loadScriptHandler = () => {
-
+      //before checkout, check the usr info is fully filled or not, if not redirect to the userinfo page;
     if(sessionStorage.getItem('token')){
       loadScript({
         "client-id":'ASLaQ5GXGWhdv3B_IetdX6rOkZw7mmjFKXCp7ZU9FPFcshXTaLi6_e6IKePO_e-cymbAhQBzpwcxBR2B'

@@ -10,6 +10,7 @@ import Ourservice from './pages/services/Ourservice';
 import ProductDetail from './pages/ProductDetail';
 import Login from './pages/signinup/Login';
 import Register from './pages/signinup/Register';
+import Userinfo from './pages/userinfo/Userinfo';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
       children : [
         { element : <Hero />, path : '/'},
         { element : <Hero />, path : '/home'},
+        { element : <Userinfo />, path : '/user/userinfo'},
         { element : <Promotions />, path : '/promotions'},
         { element : <ProductDetail />, path : '/product/:id'},
         { element : <Cart />, path : '/cart'},
