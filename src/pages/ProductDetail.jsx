@@ -78,24 +78,27 @@ const ProductDetail = () => {
                     product.reviews.length > 0 &&
                     product.reviews.map(r => (
                     <main key={r._id} className='review_card'>
-                         <div className='flex justify-between items_center'>
+                         <div className='flex justify-between align_center'>
                               <div>
                                    <div className='flex align_center'>
                               <div>
                                    <FaUserCircle />
                               </div>
-                              <p style={{ fontSize : '14px'}}>{r.user.name}</p>
-                                   </div>
-                                   <div>
-                                   {
-                                    Array.from({ length : 5 }).map((_,idx) => <RiStarSFill key={idx} className={`review_stars ${idx < r.rating ? 'star-active':null}`} />) 
-                                   }
+                   
+                                   <p style={{ fontSize : '14px'}}>{r.user.name}</p>
+                                 
                                    </div>
                               </div>
                               <p style={{ fontSize : '12px'}}>{moment(r.createdAt).fromNow()}</p>
                          </div>
 
-                         <p style={{ fontSize : '14px'}}>{r.comment}</p>
+                         <div className="flex">
+
+                         <p style={{ fontSize : '14px',flex:1}}>{r.comment}</p>
+                         {
+                              Array.from({ length : 5 }).map((_,idx) => <RiStarSFill key={idx} className={`review_stars ${idx < r.rating ? 'star-active':null}`} />) 
+                         }
+                         </div>
 
                     </main>
                     ))

@@ -17,10 +17,11 @@
     object-fit: contain;
     object-position: center;
     cursor: pointer;
-    transition: 0.23s ease;
+    transition: 50ms linear;
 }
 .card_image_container:hover .card_image{
     transform: scale(1.4);
+    transition: 0.23s ease;
 }
 .card_content_container{
     width: 100%;

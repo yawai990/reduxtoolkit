@@ -23,6 +23,16 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 .width-90{
   width: 90%;
   margin: 0 auto;
@@ -250,7 +260,7 @@ nav button > span {
   left: 0;
   padding: 10px;
 }
-.user_data_pop_up > button{
+.user_data_pop_up  > .user_data_pop_up_btn{
   width: 100%;
   text-align: start;
   padding: 0.5rem 0;
@@ -259,7 +269,7 @@ nav button > span {
   transition: all 200ms ease;
   text-transform: capitalize;
 }
-.user_data_pop_up > button:hover{
+.user_data_pop_up > .user_data_pop_up_btn:hover{
   background-color: skyblue;
   color: white;
   border-radius: 4px;

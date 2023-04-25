@@ -1,14 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from './Card';
 import { useDispatch,useSelector } from 'react-redux';
 import { getAllProducts } from '../features/Product';
 import Loading from './Loading/Loading';
+import * as api from '../services';
+import './Select.css';
 
 const Product = () => {
   const [ filterLoading , setFilterLoading ] = useState(false);
   const dispatch = useDispatch();
   const { products, loading, isSuccess } = useSelector(state => state.Product);
   const { categories,cat_loading } = useSelector(state => state.Category);
+  const [ brands, setBrands] = useState();
+
+  useEffect(() =>{
+    api.allBrands()
+    .then(resp =>{
+      const { success , brands } = resp.data;
+      if(success){
+        setFilterLoading(false);
+        setBrands(brands);
+      }else{
+        setFilterLoading(true)
+      }
+    })
+    .catch(err => console.log(err));
+  },[]);
+
 
   const filterHandler = e => {
     e.preventDefault();
@@ -18,7 +36,8 @@ const Product = () => {
     
     const category = elements.category.value;
     const brand = elements.brand.value;
-      dispatch(getAllProducts({ brand, category}))
+    const price = elements.price.value;
+      dispatch(getAllProducts({ price,brand, category}))
       setFilterLoading(false);
   }
 
@@ -35,25 +54,30 @@ const Product = () => {
       <div>
         
         <form style={{ gap : '10px'}} className='flex align_center' onChange={filterHandler}> 
-          <p>Filter By:</p>
-
+   
           <div style={{ gap : '10px'}} className='flex align_center'>
-          <select defaultValue={'DEFAULT'} name='category'>
-            <option value={'DEFAULT'} disabled>category</option>
-            {
-              categories?.map(cat => (
-                <option className='capitalize' value={cat.category} key={cat._id}>{cat.category}</option>
+          <SelectCom name={'price'} arr={[
+            { _id : 1, category : 100},
+            { _id : 2, category : 200},
+            { _id : 3, category : 500},
+            { _id : 4, category : 1000},
+            { _id : 5, category : 1000},
+
+          ]} />
+            <SelectCom name={'category'} arr={categories} />
+
+          <>
+          <p>Brand :</p>
+          <select defaultValue={'DEFAULT'} name='brand' className='custom-select'>
+            <option value={'DEFAULT'} disabled>All</option>
+          {
+              brands?.map((b,i) => (
+                <option className='capitalize' value={b} key={`brand-${i}`}>{b}</option>
               ))
             }
           </select>
+          </>
 
-          <select defaultValue={'DEFAULT'} name='brand'>
-            <option value={'DEFAULT'} disabled>brand</option>
-            <option value={1}>adidas</option>
-            <option value={2}>under armor</option>
-            <option value={3}>nike</option>
-            <option value={4}>polo</option>
-          </select>
           </div>
 
         </form>
@@ -71,6 +95,22 @@ const Product = () => {
   </div>
   </div>
   )
+};
+
+const SelectCom = ({ name, arr }) =>{
+  return   <>
+  <p className='capitalize'>{name} :</p>
+  <select defaultValue={'DEFAULT'} name={name} className='custom-select'>
+  <option value={'DEFAULT'}>All</option>
+  {
+    arr?.map(cat => (
+      <option className='capitalize' value={cat.category} key={cat._id}>
+        {name === 'price' ? `below ${cat.category}`:cat.category}
+        </option>
+    ))
+  }
+</select>
+</>
 }
 
 export default Product

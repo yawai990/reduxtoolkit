@@ -13,10 +13,10 @@ const Ourservice = () => {
 
     <section className='flex justify-center flex-wrap m-top'>
       <main style={{ gap : '0.8rem'}} className='flex flex-wrap justify-center'>
-        <ServiceCard img={reliability} title={'Reliability'} desc={'At our office, we provide a professional explanation of product details by our experienced sales staff.'} />
-        <ServiceCard img={productreturn} title={'Product Return'} desc={'At our office, we provide a professional explanation of product details by our experienced sales staff.'} />
-        <ServiceCard img={delivery} title={'Our Delivery'} desc={'At our office, we provide a professional explanation of product details by our experienced sales staff.'} />
-     
+        <ServiceCard img={reliability} title={'Reliability'} desc={'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel sunt consectetur temporibus nisi? Provident, doloribus, exercitationem sapiente.!'} />
+        <ServiceCard img={productreturn} title={'Product Return'} desc={'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel sunt consectetur temporibus nisi? Provident, doloribus, exercitationem sapiente.!'} />
+        <ServiceCard img={delivery} title={'Our Delivery'} desc={'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel sunt consectetur temporibus nisi? Provident, doloribus, exercitationem sapiente.!'} />
+
       </main>
     </section>
 

@@ -16,7 +16,7 @@ const Navbar = () => {
                     setShow(true)
                     setTimeout(() => {
                          setShow(false)
-                    }, 3000);
+                    }, 5000);
                })
           }
      },[ show ]);
@@ -48,15 +48,18 @@ const Navbar = () => {
                 <div id='profile' className='profile_container text-white relative' onClick={() => setShow(true)}>
                     <div className='profile_container flex justify-center align_center' style={{ gap:'5px'}}>
                     <BiUserCircle className='profile' />
-                    <p>admin</p>
+                    <p>{JSON.parse(localStorage.getItem('userInfo')).name}</p>
                 </div>
                {
                     show && 
                 <div className='user_data_pop_up'>
+                   
+                    <button className='user_data_pop_up_btn'>
                     <Link to={'/user/userinfo'}>
-                    <button>Setting</button>
+                         Setting
                     </Link>
-                    <button onClick={handleLogOut}>Log Out</button>
+                         </button>
+                    <button className='user_data_pop_up_btn' onClick={handleLogOut}>Log Out</button>
                 </div>
                }
                 </div>

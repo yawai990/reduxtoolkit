@@ -32,8 +32,9 @@ const User = createSlice({
                )
           })
           .addCase(logIn.fulfilled,(state, { payload }) => {
-               const { token } = payload;
+               const { token, user } = payload;
                sessionStorage.setItem('token',token);
+               localStorage.setItem('userInfo',JSON.stringify(user));
                state.loading = false;
                state.userInfo = payload;
                state.userToken = token;

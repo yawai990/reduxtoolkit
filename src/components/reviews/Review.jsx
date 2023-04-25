@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const Review = ({ pID }) => {
      const dispatch = useDispatch();
      const navigate = useNavigate();
-     const [ showErr, setShowErr ] = useState(true);
+     const [ showErr, setShowErr ] = useState(false);
  
      const handleWriteReview = async(e) => {
           e.preventDefault();

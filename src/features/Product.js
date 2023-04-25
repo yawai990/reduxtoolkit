@@ -9,10 +9,11 @@ const initialState = {
 };
 
 export const getAllProducts = createAsyncThunk('products', arg =>{
-     const { brand, category } = arg;
+     const { price,brand, category } = arg;
      try {
-          const data = api.getProducts(brand, category)
+          const data = api.getProducts(price,brand, category)
           .then(resp =>{
+
                const { products } = resp.data;
                return products;
           });

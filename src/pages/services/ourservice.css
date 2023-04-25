@@ -1,6 +1,6 @@
 .service_card{
      width: 280px;
-     height: 360px;
+     min-height: 360px;
      background-color: white;
      box-shadow: 0 0 12px rgba(32,32,32,0.2);
      border-radius: 10px;
@@ -17,7 +17,7 @@
 }
 .content_container{
      padding: 0 10px;
-     text-align:start;
+     text-align:justify;
 }
 .content_container > h5{
      margin: 5px 0;

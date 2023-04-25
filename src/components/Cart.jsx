@@ -8,6 +8,7 @@ import { clearCart,removeItem,increaseQuantity, decreaseQuantity  } from '../fea
 import { onCancelHandler,onErrHandler } from './util/Paypal';
 import { useNavigate } from 'react-router-dom';
 import * as api from '../services';
+import Loading from '../components/Loading/Loading';
 
 const Cart = () => {
   const { cartItems,amount} = useSelector(state => state.Cartitems);
@@ -15,6 +16,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [ popup,setPopup ] = useState(false);
+  const [ showLoading , setShowLoading ] = useState(false);
 
   useEffect(() =>{
     setPopup(false);
@@ -74,24 +76,41 @@ const Cart = () => {
   };
 
   const loadScriptHandler = () => {
-      //before checkout, check the usr info is fully filled or not, if not redirect to the userinfo page;
-    if(sessionStorage.getItem('token')){
-      loadScript({
-        "client-id":'ASLaQ5GXGWhdv3B_IetdX6rOkZw7mmjFKXCp7ZU9FPFcshXTaLi6_e6IKePO_e-cymbAhQBzpwcxBR2B'
-      })
-      .then(paypal => {
-        paypal.Buttons(buttons(amount,cartItems,21)).render("#paypal-container-element")
-      })
-      .catch(err => console.log(err))
-    }else{
-      navigate('/login')
-    }
-  }
+  
+      const { address, city , country, zipCode, phNumber } = JSON.parse(localStorage.getItem('userInfo'));
+      if(!(address && city && country && zipCode && phNumber)){
+        //redirect to the userInfo pages;
+        //show alert box
+        setShowLoading(true)
+        setTimeout(() =>{
+          navigate('/user/userinfo')
+          setShowLoading(false)
+        }, 3000);
+      }else{
+        if(sessionStorage.getItem('token')){
+          loadScript({
+            "client-id":'ASLaQ5GXGWhdv3B_IetdX6rOkZw7mmjFKXCp7ZU9FPFcshXTaLi6_e6IKePO_e-cymbAhQBzpwcxBR2B'
+          })
+          .then(paypal => {
+            paypal.Buttons(buttons(amount,cartItems,21)).render("#paypal-container-element")
+          })
+          .catch(err => console.log(err))
+        }else{
+          navigate('/login')
+        };
+
+        setShowLoading(false);
+      }
+  };
 
   return (
     <div>
       <h5 className='cart_header'>Your Cart ({cartItems.length || 'empty'} items)</h5>
-
+      { 
+        showLoading &&  <div className='redirect_loading flex justify-center align_center gap-sm'>
+          <Loading text={'Redirect your information page...'}/>
+          </div>
+      }
       {
         popup && 
         <main className='thank_u_popup flex justify-center align_center gap-sm'>
@@ -100,10 +119,7 @@ const Cart = () => {
             Thank You For your buying
           </p>
           <div>
-            <p className='m-top'> Redirecting to Home Page...</p>
-            {/* <div className='countdown flex justify-center align_center'>
-              {countDown}
-            </div> */}
+             <Loading text={'Redirecting Home page...'}/>
           </div>
           </div>
           </main>
