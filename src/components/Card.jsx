@@ -52,7 +52,18 @@ const Card = ({ props }) => {
             <h5 className='card_header'>{productName}</h5>
 
         <div className='card_content'>
-            <p className='card_price'>$ {price}</p>
+          <div>
+
+            {
+              (props.discount && props.discount > 0) ? 
+              <>
+                 <p className={`card_price line-through`}>$ {price}</p>
+              <p className='discound-price'>$ {price - price * props.discount/100}</p>
+              </>
+              :
+              <p className='card-prict'>$ {price}</p>
+            }
+          </div>
 
         <button className='card_button' onClick={(e) => {
           handleClick(e)

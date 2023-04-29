@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const API = axios.create({
-     // baseURL: 'https://ecodashboard-backend.onrender.com/api'
-     baseURL: 'http://localhost:5000/api'
+     baseURL: 'https://ecodashboard-backend.onrender.com/api'
+     //baseURL: 'http://localhost:5000/api'
 });
 export const Login = (data)=> API.post(`/user/login`,data);
 export const Register = (data)=> API.post(`/user/register`,data);

@@ -1,11 +1,20 @@
 .card{
     width : 280px;
-    height: 380px;
+    min-height: 380px;
     background-color: white;
     border-radius: 10px;
     color: black;
     box-shadow: 0 0 10px rgba(48, 48, 48, 0.2);
     padding: 5px 10px;
+}
+.discound-price{
+    color: rgb(226, 95, 95);
+    font-weight: bold;
+    font-size: 17px;
+}
+.line-through{
+    font-size: 14px;
+    text-decoration: line-through;
 }
 .card_image_container{
     width: 100%;
