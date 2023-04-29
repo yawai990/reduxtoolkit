@@ -5,11 +5,12 @@ import { getAllProducts } from '../features/Product';
 import Loading from './Loading/Loading';
 import * as api from '../services';
 import './Select.css';
+import PagiCom from './pagination/PagiCom';
 
 const Product = () => {
   const [ filterLoading , setFilterLoading ] = useState(false);
   const dispatch = useDispatch();
-  const { products, loading, isSuccess } = useSelector(state => state.Product);
+  const { products, loading, isSuccess, pagination, curPage } = useSelector(state => state.Product);
   const { categories,cat_loading } = useSelector(state => state.Category);
   const [ brands, setBrands] = useState();
 
@@ -26,8 +27,7 @@ const Product = () => {
     })
     .catch(err => console.log(err));
   },[]);
-
-
+ 
   const filterHandler = e => {
     e.preventDefault();
     setFilterLoading(true)
@@ -37,9 +37,9 @@ const Product = () => {
     const category = elements.category.value;
     const brand = elements.brand.value;
     const price = elements.price.value;
-      dispatch(getAllProducts({ price,brand, category}))
+      dispatch(getAllProducts({ pagi : 1,price,brand, category}))
       setFilterLoading(false);
-  }
+  };
 
   if(loading && cat_loading && !isSuccess){
     return <Loading />
@@ -83,16 +83,19 @@ const Product = () => {
         </form>
       </div>
       </main>
-    <div className='card_container'>
-    {
-      filterLoading ? <p>Loading...</p>:
-     products.length > 0 ?
-      products?.map(i => (
-        <Card key={i._id} props={i} />
-      )):
-      <p>There is no product</p>
-    }
-  </div>
+      <div className='card_container'>
+      {
+        filterLoading ? <Loading />:
+      products.length > 0 ?
+        products?.map(i => (
+          <Card key={i._id} props={i} />
+        )):
+        <p>There is no product</p>
+      }
+    </div>
+
+    <PagiCom pagination={pagination} dispatch={dispatch} curPage={curPage} setFilterLoading={setFilterLoading} />
+    
   </div>
   )
 };

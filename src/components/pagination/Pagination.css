@@ -1,0 +1,17 @@
+.number_container{
+     padding: 5px 0;
+     gap: 5px;
+}
+.pagi-number{
+     width: 30px;
+     height: 30px;
+     border-radius: 50%;
+     font-weight: bold;
+     padding: 10px;
+     box-shadow: 0 0 12px rgba(32,32,32,0.4);
+     cursor: pointer;
+}
+.active-pagi{
+     background-color: var(--primary);
+     color: white;
+}

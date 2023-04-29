@@ -7,7 +7,8 @@ const API = axios.create({
 export const Login = (data)=> API.post(`/user/login`,data);
 export const Register = (data)=> API.post(`/user/register`,data);
 
-export const getProducts = (price, brand, category ) => API.get(`/products/allproducts?brand=${brand || ''}&category=${category || ''}&price=${price || ''}`);
+export const getProducts = (pageNum,price, brand, category ) => API.get(`/products/allproducts?pageNum=${pageNum || 1}&brand=${brand || ''}&category=${category || ''}&price=${price || ''}`);
+
 export const bestSellersProducts = () => API.get('/products/bestsellers');
 
 API.interceptors.request.use(req => {
@@ -18,7 +19,7 @@ API.interceptors.request.use(req => {
      return req;
 }, err => err);
 
-export const allCategories = () => API.get(`/category/getallcategory`);
+     export const allCategories = () => API.get(`/category/getallcategory`);
 export const allBrands = () => API.get('/products/getbrands');
 
 export const getSinglePro = (id) => API.get(`/products/singleproduct/${id}`)

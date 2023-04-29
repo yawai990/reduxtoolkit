@@ -3,19 +3,20 @@ import * as api from '../services';
 
 const initialState = {
      products :[],
+     pagination : 0,
+     curPage : 1,
      loading : true,
      isSuccess : false,
      errMessage : ''
 };
 
 export const getAllProducts = createAsyncThunk('products', arg =>{
-     const { price,brand, category } = arg;
-     try {
-          const data = api.getProducts(price,brand, category)
-          .then(resp =>{
+     const { pagi,price,brand, category } = arg;
 
-               const { products } = resp.data;
-               return products;
+     try {
+          const data = api.getProducts(pagi,price,brand, category)
+          .then(resp =>{               
+               return resp.data;
           });
 
           return data;
@@ -32,16 +33,23 @@ const Products = createSlice({
                state.loading = true,
                state.isSuccess = false;
                state.products = [];
+               state.pagination = 0;
+               state.curPage = 1;
           },
           [getAllProducts.fulfilled] : (state, { payload }) => {
+               const { products,pagination, pageNum } = payload;
+               state.curPage = Number(pageNum);
                state.loading = false,
                state.isSuccess = true;
-               state.products = payload;
+               state.products = products;
+               state.pagination = pagination;
           },
           [getAllProducts.rejected]:(state,action)=>{
                state.loading = true,
                state.isSuccess = false;
                state.products = [];
+               state.pagination = 0;
+               state.curPage = 1;
           }
      }
 })

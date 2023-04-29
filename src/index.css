@@ -166,10 +166,11 @@ nav button > span {
 }
 .card_container{
   width: 100%;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 15px;
+  margin-top: 1.5rem;
+  padding: 10px;
 }
 .header_text{
   color: #444;

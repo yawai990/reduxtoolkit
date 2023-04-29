@@ -15,7 +15,7 @@ const Layout = () => {
     const ref = useRef();
 
     useEffect(() =>{
-      dispatch(getAllProducts('DEFAULT','DEFAULT'))
+      dispatch(getAllProducts(1,'DEFAULT','DEFAULT','DEFAULT'))
       dispatch(getBestSeller())
       dispatch(fetchCategory())
     },[]);

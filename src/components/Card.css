@@ -1,10 +1,10 @@
 .card{
-    width : 220px;
+    width : 280px;
     height: 380px;
     background-color: white;
     border-radius: 10px;
     color: black;
-    box-shadow: 2px 3px 20px rgba(48, 48, 48, 0.473);
+    box-shadow: 0 0 10px rgba(48, 48, 48, 0.2);
     padding: 5px 10px;
 }
 .card_image_container{
