@@ -10,7 +10,6 @@ gsap.registerPlugin(Flip)
 
 const Card = ({ props }) => {
   const { _id,productName, price, image } = props;
-  // const cart = useSelector(state => state.Cartitems);
   const dispatch = useDispatch();
 
   const handleClick = e =>{
@@ -61,7 +60,7 @@ const Card = ({ props }) => {
               <p className='discound-price'>$ {price - price * props.discount/100}</p>
               </>
               :
-              <p className='card-prict'>$ {price}</p>
+              <p className='card-price'>$ {price}</p>
             }
           </div>
 

@@ -35,7 +35,7 @@ const Hero = () => {
     </section>
     </main>
     <Bestseller />
-    <NewArrival />
+    {/* <NewArrival /> */}
     <Product />
     </>
   )

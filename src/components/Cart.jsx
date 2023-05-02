@@ -76,31 +76,36 @@ const Cart = () => {
   };
 
   const loadScriptHandler = () => {
-  
-      const { address, city , country, zipCode, phNumber } = JSON.parse(localStorage.getItem('userInfo'));
-      if(!(address && city && country && zipCode && phNumber)){
-        //redirect to the userInfo pages;
-        //show alert box
-        setShowLoading(true)
-        setTimeout(() =>{
-          navigate('/user/userinfo')
-          setShowLoading(false)
-        }, 3000);
-      }else{
-        if(sessionStorage.getItem('token')){
-          loadScript({
-            "client-id":'ASLaQ5GXGWhdv3B_IetdX6rOkZw7mmjFKXCp7ZU9FPFcshXTaLi6_e6IKePO_e-cymbAhQBzpwcxBR2B'
-          })
-          .then(paypal => {
-            paypal.Buttons(buttons(amount,cartItems,21)).render("#paypal-container-element")
-          })
-          .catch(err => console.log(err))
+
+      if(sessionStorage.getItem('token'))  {
+
+        const { address, city , country, zipCode, phNumber } = JSON.parse(localStorage.getItem('userInfo'));
+        if(!(address && city && country && zipCode && phNumber)){
+          //redirect to the userInfo pages;
+          //show alert box
+          setShowLoading(true)
+          setTimeout(() =>{
+            navigate('/user/userinfo')
+            setShowLoading(false)
+          }, 3000);
         }else{
-          navigate('/login')
-        };
+          if(sessionStorage.getItem('token')){
+            loadScript({
+              "client-id":'ASLaQ5GXGWhdv3B_IetdX6rOkZw7mmjFKXCp7ZU9FPFcshXTaLi6_e6IKePO_e-cymbAhQBzpwcxBR2B'
+            })
+            .then(paypal => {
+              paypal.Buttons(buttons(amount,cartItems,21)).render("#paypal-container-element")
+            })
+            .catch(err => console.log(err))
+          }else{
+            navigate('/login')
+          };
+        }
+      }else{
+        navigate('/login')
+      }
 
         setShowLoading(false);
-      }
   };
 
   return (
@@ -155,7 +160,7 @@ const Cart = () => {
 };
 
 const CartItemsCom = ({ props,fun,increase,decrease }) => {
-  const { _id, image, productName, price, amount } = props;
+  const { _id, image, productName, price, amount, discount } = props;
 
   return <div className='cartItem_com'>
       <section className='cartItem_com_item'>
@@ -164,7 +169,13 @@ const CartItemsCom = ({ props,fun,increase,decrease }) => {
         </div>
         <div>
           <h5>{productName}</h5>
-          <p>${price}</p>
+          <p>
+            ${price}
+            {
+              discount && 
+            <span className='discount_percent'>(5% OFF)</span>
+            }
+          </p>
           <button className='remove_btn' onClick={(e) => fun(e,_id)}>remove</button>
         </div>
       </section>

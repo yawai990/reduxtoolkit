@@ -29,7 +29,12 @@ const cartSlice = createSlice({
                 return cur + accu.amount
             },0);
             state.amount = state.cartItems.reduce((cur, accu) =>{
-                return cur + (accu.amount * accu.price)
+               if(accu.discount){
+                const dis = accu.price * accu.discount /100 * accu.amount;
+                    return (cur + accu.amount * accu.price) - dis;
+                }else{
+                    return cur + (accu.amount * accu.price)
+                }
             },0);
   
         },
@@ -49,7 +54,9 @@ const cartSlice = createSlice({
                 return cur + accu.amount
             },0);
             state.amount = state.cartItems.reduce((cur, accu) =>{
-                return cur + (accu.amount * accu.price)
+                const dis = accu.discount /100 * accu.price * accu.amount;
+
+                return (cur + accu.amount * accu.price) - dis;
             },0);
         },
         decreaseQuantity :(state,{payload}) =>{
