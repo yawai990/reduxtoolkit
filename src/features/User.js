@@ -15,7 +15,7 @@ export const logIn = createAsyncThunk('users/login', async(payload, thunkAPI) =>
           const { userLoggedIn }  = resp.data;
            return userLoggedIn;
 
-     })
+     });
      if(!userData){
           thunkAPI.rejectWithValue('user log in fail')
      }
@@ -28,8 +28,6 @@ const User = createSlice({
      extraReducers : builder => {
           builder.addCase(logIn.pending,(state, { payload }) => {
                state.loading = true
-               console.log('pending', state, payload
-               )
           })
           .addCase(logIn.fulfilled,(state, { payload }) => {
                const { token, user } = payload;

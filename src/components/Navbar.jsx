@@ -64,11 +64,18 @@ const Navbar = () => {
                }
                 </div>
                : 
+               <>
+          <Link to={'/register'}>
+               <button className='btn text-white'>
+                    Sign Up
+               </button>
+          </Link>
                <Link to={'/login'}>
                <button className='btn text-white'>
                     Log In
                </button>
           </Link>
+          </>
           }
    
      <Link to={'/cart'}>

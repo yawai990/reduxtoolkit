@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import './login.css';
+import { Link } from 'react-router-dom';
 import image from '../../assets/pngwing.com (3).png';
 import { AiOutlineMail } from 'react-icons/ai';
 import Formcontrol from '../../components/formcontrol/Formcontrol';
@@ -30,7 +31,6 @@ const Login = () => {
     }
   };
 
-
   return (
     <main className='w-full h-full flex justify-center align_center'>
       <section className="login_form_container flex">
@@ -58,14 +58,15 @@ const Login = () => {
             </form>
 
             <div className='m-top'>
-              <p>
+              <main> <div>Register</div>
                 <small className='flex'>
                   don't have account?
-                <a style={{
-                  color:'blue'
-                }} href="" className='capitalize'>sign up</a>
+                <Link to={'/register'} style={{
+                  color:'blue',
+                  marginLeft:'4px'
+                }} href="" className='capitalize'>sign up</Link>
                 </small>
-              </p>
+              </main>
             </div>
           </div>
       </section>

@@ -9,9 +9,9 @@ const Formcontrol = ({ icon, mt,type,passwordIcon, name, placeholder, passwordFu
                 <div className='form_icon'>
                   {icon}
                 </div>
-                <input type={type || 'text'} className='form_input'name={name} placeholder={placeholder || ''} />
+                <input type={type || 'text'} className='form_input' name={name} placeholder={placeholder || ''} />
                 {
-                    name ==='password' &&  <button type='button' style={{
+                   (name ==='password' || name==='c_password') &&  <button type='button' style={{
                          position:'absolute',
                          right:'10px',
                          zIndex:10

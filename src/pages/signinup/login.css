@@ -33,3 +33,9 @@
      background-color: var(--primary);
      border: none;
 }
+
+.err_msg{
+     color: rgb(235, 82, 82);
+     font-size: 12px;
+     margin-bottom: 10px;
+}

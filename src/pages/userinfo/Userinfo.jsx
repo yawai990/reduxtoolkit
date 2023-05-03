@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './userinfo.css';
 import * as api from '../../services';  
+import { useLocation } from 'react-router-dom';
 
 const Userinfo = () => {
      const [ userInfo, setUserInfo ] = useState({});
@@ -30,6 +31,7 @@ const Userinfo = () => {
          const { success , userupdateData, message } = resp.data;
          if(success){
           localStorage.setItem('userInfo', JSON.stringify(userupdateData));
+          history.back()
          }
         })
         .catch(err => console.log(err));
