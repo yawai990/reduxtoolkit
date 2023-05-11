@@ -9,7 +9,8 @@ import Flip from 'gsap/Flip';
 gsap.registerPlugin(Flip)
 
 const Card = ({ props }) => {
-  const { _id,productName, price, image } = props;
+  const { _id,productName, price, image, stock } = props;
+
   const dispatch = useDispatch();
 
   const handleClick = e =>{
@@ -64,9 +65,21 @@ const Card = ({ props }) => {
             }
           </div>
 
-        <button className='card_button' onClick={(e) => {
+            <div>
+        <button
+        style={{
+          cursor : stock < 1 ? 'not-allowed':'pointer'
+        }}
+         className={`card_button ${stock < 1 && 'card_btn_disabled'}`}
+        disabled={stock < 1 ? true:false}
+        onClick={(e) => {
           handleClick(e)
           dispatch(addItem(props))}}>Add to card</button>
+      {
+        stock < 1 &&
+          <span className='out_of_stock'>out of stock</span>
+      }
+          </div>
           </div>
           
         </div>

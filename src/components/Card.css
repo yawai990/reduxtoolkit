@@ -76,3 +76,13 @@
     object-fit: cover;
     position: absolute;
 }
+
+.out_of_stock{
+    font-size: 10px;
+    display: inline;
+    color: tomato;
+}
+.card_btn_disabled{
+    background-color: rgb(165, 165, 165) !important;
+    border: none !important;
+}

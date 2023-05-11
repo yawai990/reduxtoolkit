@@ -9,6 +9,7 @@ import { onCancelHandler,onErrHandler } from './util/Paypal';
 import { useNavigate } from 'react-router-dom';
 import * as api from '../services';
 import Loading from '../components/Loading/Loading';
+import { getAllProducts } from '../features/Product';
 
 const Cart = () => {
   const { cartItems,amount} = useSelector(state => state.Cartitems);
@@ -65,6 +66,7 @@ const Cart = () => {
             setTimeout(() =>{
               setPopup(false);
               navigate('/');
+              dispatch(getAllProducts(1,'DEFAULT','DEFAULT','DEFAULT'))
               dispatch(clearCart())
             },4000);  
           }
@@ -160,7 +162,7 @@ const Cart = () => {
 };
 
 const CartItemsCom = ({ props,fun,increase,decrease }) => {
-  const { _id, image, productName, price, amount, discount } = props;
+  const { _id, image, productName, price, amount, discount, stock } = props;
 
   return <div className='cartItem_com'>
       <section className='cartItem_com_item'>
@@ -181,7 +183,9 @@ const CartItemsCom = ({ props,fun,increase,decrease }) => {
       </section>
 
       <section className='item_quantity'>
-        <button className='cart_btn plus' onClick={() => increase(_id)}>
+        <button className={`cart_btn plus ${amount === stock && 'cart_btn_disabled'}`}
+        disabled={amount === stock ? true:false}
+        onClick={() => increase(_id)}>
           <AiOutlinePlus />
         </button>
         <p style={{

@@ -54,7 +54,7 @@ const cartSlice = createSlice({
                 return cur + accu.amount
             },0);
             state.amount = state.cartItems.reduce((cur, accu) =>{
-                const dis = accu.discount /100 * accu.price * accu.amount;
+                const dis =(accu.discount | 0 )/100 * accu.price * accu.amount;
 
                 return (cur + accu.amount * accu.price) - dis;
             },0);
