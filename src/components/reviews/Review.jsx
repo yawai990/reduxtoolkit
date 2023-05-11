@@ -20,8 +20,10 @@ const Review = ({ pID }) => {
               if(rating && desc ) {
                 await api.WriteReview(pID,{rating,comment : desc})
                 .then(resp =>{
-                     dispatch(getAllProducts())
+                    console.log(resp)
+                    dispatch(getAllProducts(1,'DEFAULT','DEFAULT','DEFAULT'))
                      setShowErr(false)
+                     navigate('/')
                 })
                 .catch(err => console.log(err))
               }

@@ -45,7 +45,7 @@ const ProductDetail = () => {
      {
           Array.from({ length : 5 }).map((_,idx) => <RiStarSFill key={idx} className={`stars ${idx < product.rating ? 'star-active':null}`} />) 
      }
-    <span style={{ fontSize : '14px'}}>({product.reviews | 0} Ratings)</span> 
+    <span style={{ fontSize : '14px'}}>({product.reviews.length | 0} Ratings)</span> 
      </div>
 
 
@@ -80,7 +80,8 @@ const ProductDetail = () => {
                     <main key={r._id} className='review_card'>
                          <div className='flex justify-between align_center'>
                               <div>
-                                   <div className='flex align_center'>
+
+                                   <div style={{ gap :'5px'}} className='flex justify-center align_center'>
                               <div>
                                    <FaUserCircle />
                               </div>

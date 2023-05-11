@@ -45,6 +45,7 @@
 }
 .review_card{
      position: relative;
+     margin-bottom: 2rem;
 }
 .review_card::before{
      content: '';
