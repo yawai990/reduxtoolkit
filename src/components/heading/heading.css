@@ -1,0 +1,21 @@
+.header_text_line{
+     height: 5px;
+     margin-top: 4rem;
+     text-align: center;
+     position: relative;
+}
+.header_text_line .line{
+     width: 100%;
+     height: 4px;
+     background-color: var(--primary);
+}
+.heading_text{
+     background-color: rgb(255, 255, 255);
+     padding: 0 20px;
+     position: absolute;
+     top: -50%;
+     left: 50%;
+     transform: translate(-50%,-50%);
+     font-style: italic;
+     margin: 0;
+}

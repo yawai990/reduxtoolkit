@@ -1,0 +1,23 @@
+.faq_container{
+     border-bottom: 2.3px dotted grey;
+     padding-bottom: 1.2rem;
+}
+.drop_down_btn{
+     width: 30px;
+     height: 30px;
+     border: none;
+     cursor: pointer;
+     font-size: 2rem;
+     background-color: transparent;
+}
+
+.answer{
+     height: 0;
+     overflow: hidden;
+     transition: all 300ms linear;
+}
+
+.answer.show_answer{
+     height: 60px;
+     padding: 10px 0;
+}

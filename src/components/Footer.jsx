@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaFacebookF,FaTwitter,FaGooglePlusG,FaLinkedinIn,FaCcVisa,FaCcPaypal,FaCcMastercard } from 'react-icons/fa';
 
 const Footer = () => {
@@ -13,7 +14,7 @@ const Footer = () => {
 
           <div>
           {
-          ['+959-988988988(whatapps)','+959-988988989(mobile)'].map((t,idx)=><a href="#" key={`${t}-${idx}`} >{t}</a>)
+          ['+959-988988988(whatapps)','+959-988988989(mobile)'].map((t,idx)=><Link to={''} key={`${t}-${idx}`} >{t}</Link>)
          }
           </div>
         </main>
@@ -23,7 +24,7 @@ const Footer = () => {
 
         <main>
          {
-          ['frequent questions','shipping & return','contact us'].map((t,idx)=><a href="#" key={`${t}-${idx}`} >{t}</a>)
+          ['frequent questions','shipping & return','contact us'].map((t,idx)=><Link to={`/${t}`} key={`${t}-${idx}`} >{t}</Link>)
          }
         </main>
       </div>

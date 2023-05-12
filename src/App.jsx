@@ -10,6 +10,7 @@ import Ourservice from './pages/services/Ourservice';
 import ProductDetail from './pages/ProductDetail';
 import Login from './pages/signinup/Login';
 import Register from './pages/signinup/Register';
+import FAQ from './pages/FAQ';
 import Userinfo from './pages/userinfo/Userinfo';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         { element : <Cart />, path : '/cart'},
         { element : <Ourservice />, path : '/our services'},
         { element : <Aboutus />, path : '/about us'},
+        { element : <FAQ />, path : '/frequent questions'},
       ]
     },
     {

@@ -1,12 +1,8 @@
-import React,{ useEffect } from 'react';
+import React from 'react';
 import './Card.css';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addItem } from '../features/Cartitems';
-import gsap from 'gsap';
-import Flip from 'gsap/Flip';
-
-gsap.registerPlugin(Flip)
 
 const Card = ({ props }) => {
   const { _id,productName, price, image, stock } = props;

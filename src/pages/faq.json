@@ -1,0 +1,26 @@
+[
+     {
+          "id":1,
+          "question":"How would e-commerce improve the revenue/collection cycle?",
+          "answer":"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et iure numquam provident quia odit dolorum?"
+     },
+     {
+          "id":2,
+          "question":"What are the three main categories of electronic commerce?",
+          "answer":"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et iure numquam provident quia odit dolorum?"
+     },
+     {
+          "id":3,
+          "question":"How to apply Internet technologies for e-commerce to meet business objectives?",
+          "answer":"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et iure numquam provident quia odit dolorum?"
+     },  {
+          "id":4,
+          "question":"How are handmade jewelry businesses using an online marketplace selling platform to differentiate themselves from competitors?",
+          "answer":"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et iure numquam provident quia odit dolorum?"
+     },
+     {
+          "id":5,
+          "question":"How has the advent of Web 2.0 advanced the globalization of today's businesses?",
+          "answer":"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et iure numquam provident quia odit dolorum?"
+     }
+]
