@@ -49,11 +49,10 @@ const Card = ({ props }) => {
 
         <div className='card_content'>
           <div>
-
             {
               (props.discount && props.discount > 0) ? 
               <>
-                 <p className={`card_price line-through`}>$ {price}</p>
+                 <p className={`card-price line-through`}>$ {price}</p>
               <p className='discound-price'>$ {price - price * props.discount/100}</p>
               </>
               :

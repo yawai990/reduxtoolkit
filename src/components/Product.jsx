@@ -42,7 +42,14 @@ const Product = () => {
   };
 
   if(loading && cat_loading && !isSuccess){
-    return <Loading />
+    return  <div className="width-90">
+    <div className="skeleton skeleton_header" />
+    <div className="flex justify_between gap-sm">
+  {
+    Array.from({length:4}).map((_,idx) => <Loading key={idx} />)
+  }
+  </div>
+</div>
   }
 
   return (

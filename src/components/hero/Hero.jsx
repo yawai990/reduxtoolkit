@@ -74,7 +74,10 @@ const Hero = () => {
      </div>
     <Bestseller />
     {/* <NewArrival /> */}
+
+    <div style={{ marginTop:'2rem'}}>
     <Product />
+     </div>
     </>
   )
 }
