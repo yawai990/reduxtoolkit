@@ -8,6 +8,8 @@ import { getBestSeller } from './features/BestSeller';
 import { fetchCategory } from './features/Category';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import './style.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const Layout = () => {
     const dispatch = useDispatch();
@@ -22,6 +24,7 @@ const Layout = () => {
 
   return (
     <>
+      <ToastContainer />
           <Navbar />
           <SwitchTransition>
             <CSSTransition nodeRef={ref} timeout={250} classNames={'fade'} key={pathname}>

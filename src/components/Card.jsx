@@ -2,8 +2,10 @@ import React from 'react';
 import './Card.css';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { gsap } from 'gsap';
+import { Flip } from 'gsap/Flip';
 import { addItem } from '../features/Cartitems';
-
+gsap.registerPlugin(Flip);
 const Card = ({ props }) => {
   const { _id,productName, price, image, stock } = props;
 

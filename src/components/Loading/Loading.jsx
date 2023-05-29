@@ -5,7 +5,7 @@ const Loading = ({ text }) => {
   return (
     <main className='skeleton_card'>
 
-      <div class="skeleton_image skeleton" />
+      <div className="skeleton_image skeleton" />
 
         <div className="skeleton-text skeleton" />
 

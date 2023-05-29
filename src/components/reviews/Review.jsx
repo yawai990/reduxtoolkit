@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as api from '../../services';
 import './review.css';
 import { getAllProducts } from '../../features/Product';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Review = ({ pID }) => {
      const dispatch = useDispatch();
@@ -20,17 +21,22 @@ const Review = ({ pID }) => {
               if(rating && desc ) {
                 await api.WriteReview(pID,{rating,comment : desc})
                 .then(resp =>{
-                    console.log(resp)
-                    dispatch(getAllProducts(1,'DEFAULT','DEFAULT','DEFAULT'))
+                    dispatch(getAllProducts(1,'DEFAULT','DEFAULT','DEFAULT'));
+                    toast.success(resp.data)
                      setShowErr(false)
-                     navigate('/')
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+                const { data, status } = err.response;
+                if(status === 400){
+                    toast.error(data)
+                }
+                })
               }
          }else{
           setShowErr(true)
           navigate('/login')
-         }
+         };
+         elements.message.value = '';
      }
   return (
     <form onSubmit={handleWriteReview}>
@@ -51,7 +57,7 @@ const Review = ({ pID }) => {
 
      <div className='form-control'>
           <label htmlFor="message">Description</label>
-         <textarea name='review_message'id='message' placeholder='Write your review....' />
+         <textarea name='review_message' id='message' placeholder='Write your review....' />
      </div>
 
      <button className='btn review_btn'>Submit</button>

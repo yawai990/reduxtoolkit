@@ -30,9 +30,8 @@ const ProductDetail = () => {
 
      useEffect(() => {
           getProduct(curProductId)
-     }, []);
-
-
+     }, [product]);
+   
      return (
     <main className="product_datails_container">
 
@@ -48,16 +47,13 @@ const ProductDetail = () => {
     <span style={{ fontSize : '14px'}}>({product.reviews.length | 0} Ratings)</span> 
      </div>
 
-
      <div className='product_detail_content flex gap'>
           <section className='detail_img_container p-x-sm'>
           <img src={`https://res.cloudinary.com/dtcws1ecu/image/upload/v1675503460/${product.image[0].path}`} alt="" />
           </section>
-
           <section style={{
                width:'50%'
           }}>
-
           <main className='flex align_center justify-between'>
                <div>
                <p className='price'>
@@ -70,53 +66,40 @@ const ProductDetail = () => {
                onClick={() => dispatch(addItem(filterprod))}
                >add to cart</button>
           </main>
-
           <div className='m-top'>
                <h4>Review</h4>
-
-               {
-                    product.reviews.length > 0 &&
-                    product.reviews.map(r => (
-                    <main key={r._id} className='review_card'>
-                         <div className='flex justify-between align_center'>
-                              <div>
-
-                                   <div style={{ gap :'5px'}} className='flex justify-center align_center'>
-                              <div>
-                                   <FaUserCircle />
-                              </div>
-                   
-                                   <p style={{ fontSize : '14px'}}>{r.user.name}</p>
-                                 
-                                   </div>
-                              </div>
-                              <p style={{ fontSize : '12px'}}>{moment(r.createdAt).fromNow()}</p>
-                         </div>
-
-                         <div className="flex">
-
-                         <p style={{ fontSize : '14px',flex:1}}>{r.comment}</p>
-                         {
-                              Array.from({ length : 5 }).map((_,idx) => <RiStarSFill key={idx} className={`review_stars ${idx < r.rating ? 'star-active':null}`} />) 
-                         }
-                         </div>
-
-                    </main>
-                    ))
-               }
+               { product.reviews.length > 0 && product.reviews.map(r => <ReviewBox key={r._id} {...r} />)}
           </div>
-
                <Review pID={curProductId} />
-
           </section>
-
      </div>
-
           </>
      }
-   
     </main>
   )
 }
+
+const ReviewBox = (props) =>{
+     const { _id, comment,rating, createdAt,user } = props;
+     return <main key={_id} className='review_card'>
+     <div className='flex justify-between align_center'>
+          <div>
+               <div style={{ gap :'5px'}} className='flex justify-center align_center'>
+          <div>
+               <FaUserCircle />
+          </div>
+               <p style={{ fontSize : '14px'}}>{user.name}</p> 
+               </div>
+          </div>
+          <p style={{ fontSize : '12px'}}>{moment(createdAt).fromNow()}</p>
+     </div>
+     <div className="flex">
+     <p style={{ fontSize : '14px',flex:1}}>{comment}</p>
+     {
+          Array.from({ length : 5 }).map((_,idx) => <RiStarSFill key={idx} className={`review_stars ${idx < rating ? 'star-active':null}`} />) 
+     }
+     </div>
+     </main>
+};
 
 export default ProductDetail
