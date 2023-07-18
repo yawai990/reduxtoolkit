@@ -46,7 +46,7 @@ const Card = ({ props }) => {
         </div>
       </Link>
 
-        <div className='card_content_container'>
+        <div className='card_content_container text-black'>
             <h5 className='card_header'>{productName}</h5>
 
         <div className='card_content'>
@@ -65,7 +65,7 @@ const Card = ({ props }) => {
             <div>
         <button
         style={{
-          cursor : stock < 1 ? 'not-allowed':'pointer'
+          cursor : stock < 1 ? 'not-allowed':'pointer',
         }}
          className={`card_button ${stock < 1 && 'card_btn_disabled'}`}
         disabled={stock < 1 ? true:false}

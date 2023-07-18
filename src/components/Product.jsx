@@ -60,7 +60,9 @@ const Product = () => {
 
       <div>
         
-        <form style={{ gap : '10px'}} className='flex align_center' onChange={filterHandler}> 
+        <form style={{ gap : '10px'}} 
+        className='flex align_center' 
+        onChange={filterHandler}> 
    
           <div style={{ gap : '10px'}} className='flex align_center'>
           <SelectCom name={'price'} arr={[
@@ -114,7 +116,7 @@ const SelectCom = ({ name, arr }) =>{
   <option value={'DEFAULT'}>All</option>
   {
     arr?.map(cat => (
-      <option className='capitalize' value={cat.category} key={cat._id}>
+      <option className='capitalize text-black' value={cat.category} key={cat._id}>
         {name === 'price' ? `below ${cat.category}`:cat.category}
         </option>
     ))
